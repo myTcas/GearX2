@@ -98,6 +98,7 @@ nav{background-color: #800000 !important;}
             width: 15px;
             background-color: #a91f23;
             display: inline-block;
+            transform: rotate(45deg);
         }
         
         .color-red {
