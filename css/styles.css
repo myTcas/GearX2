@@ -7,6 +7,10 @@ body{
   font-family: "Anuphan", serif;
 }
 
+.bg-primary {
+    background-color: #800000 !important;
+}
+
 nav{background-color: #800000 !important;}
 
 .navbar-collapse {flex-grow: unset !important;}
