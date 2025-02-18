@@ -59,3 +59,7 @@ nav{background-color: #800000 !important;}
     justify-content: center;
     text-align: center;
 }
+
+.text p {
+    font-size: 20px;
+}
