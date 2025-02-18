@@ -33,3 +33,7 @@ nav{background-color: #800000 !important;}
         color: var(--bs-dropdown-link-hover-color) !important;
     }
 }
+
+.carousel-item {
+    cursor: grab;
+}
