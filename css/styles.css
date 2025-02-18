@@ -7,24 +7,6 @@ body{
   font-family: "Anuphan", serif;
 }
 
-header {
-    background: #800000;
-    color: #fff;
-    padding: 0 2.5%;
-}
+nav{background-color: #800000 !important;}
 
-.flex {
-    display: flex;
-}
-
-.grid {
-    display: grid;
-}
-
-.space-around {
-    justify-content: space-around;
-}
-
-.nav {
-    margin: auto 0px;
-}
+.navbar-collapse {flex-grow: unset !important;}
