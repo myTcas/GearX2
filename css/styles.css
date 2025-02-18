@@ -63,3 +63,42 @@ nav{background-color: #800000 !important;}
 .text p {
     font-size: 20px;
 }
+
+        .service-title {
+            color: #333;
+            font-weight: bold;
+        }
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            transition: 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-card h5 {
+            font-size: 16px;
+        }
+
+        .service-card p {
+            font-size: 12px;
+        }
+
+        .service-icon {
+            font-size: 40px;
+            color: #ffc107;
+        }
+        span.square {
+            height: 15px;
+            width: 15px;
+            background-color: #a91f23;
+            display: inline-block;
+        }
+        
+        .color-red {
+            color: #ff0000;
+        }
