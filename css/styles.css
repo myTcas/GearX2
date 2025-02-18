@@ -14,3 +14,18 @@ body{
 nav{background-color: #800000 !important;}
 
 .navbar-collapse {flex-grow: unset !important;}
+
+@media (max-width: 992px) {
+    .dropdown-menu {
+        --bs-dropdown-bg: transparent !important;
+        background-color: transparent !important;
+        background-color: var(--bs-dropdown-bg);
+    }
+    
+    .dropdown-item {
+        --bs-dropdown-link-color: #fff;
+        color: #fff !important;
+        color: var(--bs-dropdown-link-color);
+        border-radius: var(--bs-dropdown-item-border-radius, 0);
+    }
+}
