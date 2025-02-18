@@ -15,3 +15,7 @@ header {
 .grid {
     display: grid;
 }
+
+.space-around {
+    justify-content: space-around;
+}
