@@ -1,0 +1,17 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background: #252631;
+    color: #fff;
+}
+
+.flex {
+    display: flex;
+}
+
+.grid {
+    display: grid;
+}
