@@ -5,6 +5,7 @@
 
 body{
   font-family: "Anuphan", serif !important;
+  overflow-x: hidden;
 }
 
 .bg-primary {
