@@ -4,8 +4,9 @@
 }
 
 header {
-    background: #252631;
+    background: #800000;
     color: #fff;
+    padding: 0 2.5%;
 }
 
 .flex {
