@@ -3,6 +3,10 @@
     margin: 0;
 }
 
+body{
+  font-family: "Anuphan", serif;
+}
+
 header {
     background: #800000;
     color: #fff;
