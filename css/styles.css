@@ -49,3 +49,13 @@ nav{background-color: #800000 !important;}
 #mainSlider img {
     border-radius: 10px;
 }
+
+.text h1 {
+    font-weight: bold;
+}
+.text {
+    margin: 20px auto;
+    display: grid;
+    justify-content: center;
+    text-align: center;
+}
