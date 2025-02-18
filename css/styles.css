@@ -20,6 +20,7 @@ nav{background-color: #800000 !important;}
         --bs-dropdown-bg: transparent !important;
         background-color: transparent !important;
         background-color: var(--bs-dropdown-bg);
+        border: none !important;
     }
     
     .dropdown-item {
