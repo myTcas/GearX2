@@ -6,51 +6,66 @@
     <title>GearX2 - สำนักงานฟันเฟืองแห่งวิศวกรรม</title>
     <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <header class="flex space-around">
-        <div class="flex">
-            <img src="img/GearX2_logo.png" width="80px">
-            <div class="grid" style=" align-items: center; padding-top: 10px; ">
-                <h1>GearX2</h1>
-                <p>สำนักงานฟันเฟืองแห่งวิศวกรรมรุ่นที่ 2</p>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">สำนักงานนักเรียนเตรียมวิศวกรรมรุ่นที่ 2</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <!-- บริการ -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown">
+                            บริการ
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">เปลี่ยนแปลงข้อมูลสมาชิก</a></li>
+                            <li><a class="dropdown-item" href="#">ลงทะเบียนรับบัตรสมาชิก</a></li>
+                            <li><a class="dropdown-item" href="#">สอบถามเตรียมวิศวะ รุ่นที่ 2</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- ข่าวสาร -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="newsDropdown" role="button" data-bs-toggle="dropdown">
+                            ข่าวสาร
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">ความสำเร็จรุ่น 2</a></li>
+                            <li><a class="dropdown-item" href="#">ข่าวสภา GearX2</a></li>
+                            <li><a class="dropdown-item" href="#">กิจกรรม</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- เกี่ยวกับองค์กร -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown">
+                            เกี่ยวกับองค์กร
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">ประวัติองค์กร</a></li>
+                            <li><a class="dropdown-item" href="#">พันธกิจ</a></li>
+                            <li><a class="dropdown-item" href="#">ทีมงาน</a></li>
+                            <li><a class="dropdown-item" href="#">ผู้บริหาร</a></li>
+                            <li><a class="dropdown-item" href="#">โครงสร้างองค์กร</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- สำนักงานใหญ่ -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://dara-esc.pages.dev/">สำนักงานใหญ่</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="flex nav">
-            <ul>
-                <li>
-                    <a>บริการ</a>
-                    <ul>
-                        <li><a href="">เปลี่ยนแปลงข้อมูลสมาชิก</a></li>
-                        <li><a href="">ลงทะเบียนรับบัตรสมาชิก</a></li>
-                        <li><a href="">สอบถามเตรียมวิศวะ รุ่นที่ 2</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a>ข่าวสาร</a>
-                    <ul
-                        <li><a href="">ความสำเร็จรุ่น 2</a></li>
-                        <li><a href="">ข่าวสภา GearX2</a></li>
-                        <li><a href="">กิจกรรม</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a>เกี่ยวกับองค์กร</a>
-                    <ul>
-                        <li><a href="">ประวัติองค์กร</a></li>
-                        <li><a href="">พันธกิจ</a></li>
-                        <li><a href="">ทีมงาน</a></li>
-                        <li><a href="">ผู้บริหาร</a></li>
-                        <li><a href="">โครงสร้างองค์กร</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="https://dara-esc.pages.dev/">สำนักงานใหญ่</a>
-                </li>
-            </ul>
-        </div>
-
-    </header>
+    </nav>
+    
     <main>
         <section class="hero">
             <div class="gear-container">
