@@ -19,3 +19,7 @@ header {
 .space-around {
     justify-content: space-around;
 }
+
+.nav {
+    margin: auto 0px;
+}
