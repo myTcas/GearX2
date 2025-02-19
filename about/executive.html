@@ -18,6 +18,29 @@
             padding: 20px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
+        
+        .executives {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .executive-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            width: 250px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .executive-card h3 {
+            margin: 5px 0;
+            color: #2980b9;
+        }
+        .executive-card p {
+            margin: 0;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -89,7 +112,7 @@
         </div>
         <div class="mt-4">
             <h3>รายชื่อผู้บริหาร</h3>
-            <div id="executive-list" class="row"></div>
+            <div class="executives" id="executives"></div>
         </div>
     </main>
   
@@ -135,25 +158,27 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch("/DATA/executive.json")
-                .then(response => response.json())
-                .then(data => {
-                    const list = document.getElementById("executive-list");
-                    data.forEach(executive => {
-                        let card = document.createElement("div");
-                        card.className = "col-md-4 d-flex justify-content-center";
-                        card.innerHTML = `
-                            <div class="executive-card">
-                                <h5>${executive.name}</h5>
-                                <p>${executive.position}</p>
-                            </div>
-                        `;
-                        list.appendChild(card);
-                    });
-                })
-                .catch(error => console.error("Error loading executive data:", error));
-        });
+        async function fetchExecutives() {
+            try {
+                const response = await fetch('/DATA/executive.json');
+                const executives = await response.json();
+                const container = document.getElementById('executives');
+                
+                executives.forEach(executive => {
+                    const card = document.createElement('div');
+                    card.classList.add('executive-card');
+                    card.innerHTML = `
+                        <h3>${executive.name}</h3>
+                        <p>${executive.position}</p>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error fetching executives:', error);
+            }
+        }
+
+        fetchExecutives();
     </script>
 
 </body>
