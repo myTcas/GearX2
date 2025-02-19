@@ -65,37 +65,37 @@
         document.getElementById("username").addEventListener("input", function() {
             var username = this.value.trim();
             if (username === "45405") {
-                showError("⛔ บัญชีนี้ถูกระงับการใช้งาน <br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
+                showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
             } else {
                 // ถ้าไม่ใช่ 45405 ให้ซ่อนข้อความผิดพลาด
                 document.getElementById("errorMessage").style.display = "none";
             }
         });
-
+    
         document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
-
+    
             var username = document.getElementById("username").value.trim();
             var password = document.getElementById("password").value.trim();
-
+    
             try {
                 // ดึงข้อมูลจาก login.json
                 let response = await fetch("/DATA/login.json");
                 let users = await response.json();
-
+    
                 // ค้นหาข้อมูลในไฟล์ JSON
                 let user = users.find(user => user.username === username);
-
+    
                 if (!user) {
                     showError("❌ ไม่พบรหัสนักเรียนนี้");
                     return;
                 }
-
+    
                 if (user.password === "Banned") {
-                    showError("⛔ บัญชีนี้ถูกระงับการใช้งาน");
+                    showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
                     return;
                 }
-
+    
                 if (user.password === password) {
                     document.getElementById("loginBox").style.display = "none";  // ซ่อนฟอร์มล็อกอิน
                     document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
@@ -107,10 +107,10 @@
                 alert("ไม่สามารถโหลดข้อมูลเข้าสู่ระบบได้!");
             }
         });
-
+    
         function showError(message) {
             let errorMessage = document.getElementById("errorMessage");
-            errorMessage.textContent = message;
+            errorMessage.innerHTML = message; // ใช้ innerHTML แทน textContent เพื่อให้ <br> ทำงานได้
             errorMessage.style.display = "block";
         }
     </script>
