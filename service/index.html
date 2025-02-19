@@ -54,45 +54,42 @@
                 
                 <div id="mainContent">
                     <h4>เนื้อหาหลักสำหรับสมาชิก</h4>
+                    <div id="userDetail"></div>
                     <button onclick="logout()">ออกจากระบบ</button>
                     <div id="welcomeMessage"></div>
                 </div>
             </main>
         </div>
     </div>
-
     <script>
         document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
-
             var username = document.getElementById("username").value.trim();
             var password = document.getElementById("password").value.trim();
-
+    
             try {
                 // ดึงข้อมูลจาก login.json
                 let response = await fetch("/DATA/login.json");
                 let users = await response.json();
-
-                // ค้นหาข้อมูลในไฟล์ JSON
                 let user = users.find(user => user.username === username);
-
+    
                 if (!user) {
                     showError("❌ ไม่พบรหัสนักเรียนนี้");
                     return;
                 }
-
+    
                 if (user.password === "Banned") {
                     showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
                     return;
                 }
-
+    
                 if (user.password === password) {
-                    // บันทึกข้อมูลผู้เข้าสู่ระบบใน Local Storage
-                    localStorage.setItem("loggedInUser", username);
-
-                    document.getElementById("loginBox").style.display = "none";  // ซ่อนฟอร์มล็อกอิน
-                    document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
-                    document.getElementById("welcomeMessage").innerText = `ยินดีต้อนรับ, ${username}`;
+                    // ดึงข้อมูลจาก m-information.json
+                    let infoResponse = await fetch("/DATA/m-information.json");
+                    let infoUsers = await infoResponse.json();
+                    let userInfo = infoUsers.find(info => info.username === username);
+    
+                    displayUserInfo(userInfo); // แสดงข้อมูลของผู้ใช้
                 } else {
                     showError("❌ รหัสผ่านไม่ถูกต้อง");
                 }
@@ -101,30 +98,55 @@
                 alert("ไม่สามารถโหลดข้อมูลเข้าสู่ระบบได้!");
             }
         });
-
-        function showError(message) {
-            let errorMessage = document.getElementById("errorMessage");
-            errorMessage.innerHTML = message; // ใช้ innerHTML แทน textContent เพื่อให้ <br> ทำงานได้
-            errorMessage.style.display = "block";
+    
+        function displayUserInfo(userInfo) {
+            document.getElementById("loginBox").style.display = "none"; // ซ่อนฟอร์มล็อกอิน
+            document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
+            
+            // แสดงข้อมูลของผู้ใช้
+            const userDetailContainer = document.getElementById("userDetail");
+            userDetailContainer.innerHTML = `
+                <h4>ข้อมูลสมาชิก</h4>
+                <p>ชื่อ: ${userInfo.prefix} ${userInfo.fname} ${userInfo.lname}</p>
+                <p>ปริญญาตรี: ${userInfo["ปริญญาตรี"]}</p>
+                <p>ปริญญาโท: ${userInfo["ปริญญาโท"]}</p>
+                <p>ปริญญาเอก: ${userInfo["ปริญญาเอก"]}</p>
+                <p>สถานะ: ${userInfo["สถานะ"]}</p>
+                <h5>แก้ไขข้อมูล</h5>
+                <input type="text" id="editDegree" placeholder="ปริญญาตรี" value="${userInfo["ปริญญาตรี"]}">
+                <input type="text" id="editMaster" placeholder="ปริญญาโท" value="${userInfo["ปริญญาโท"]}">
+                <input type="text" id="editDoctor" placeholder="ปริญญาเอก" value="${userInfo["ปริญญาเอก"]}">
+                <button onclick="saveChanges('${userInfo.username}')">บันทึกการเปลี่ยนแปลง</button>
+            `;
         }
-
-        function logout() {
-            localStorage.removeItem("loggedInUser");
-            document.getElementById("mainContent").style.display = "none"; // ซ่อนเนื้อหาหลัก
-            document.getElementById("loginBox").style.display = "block"; // แสดงฟอร์มล็อกอิน
-            document.getElementById("errorMessage").style.display = "none"; // ซ่อนข้อความผิดพลาด
-        }
-
-        // ตรวจสอบผู้ใช้เมื่อโหลดหน้าเว็บ
-        window.onload = function() {
-            var loggedInUser = localStorage.getItem("loggedInUser");
-            if (loggedInUser) {
-                document.getElementById("loginBox").style.display = "none"; // ซ่อนฟอร์มล็อกอิน
-                document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
-                document.getElementById("welcomeMessage").innerText = `ยินดีต้อนรับ, ${loggedInUser}`;
+    
+        async function saveChanges(username) {
+            const degree = document.getElementById("editDegree").value;
+            const master = document.getElementById("editMaster").value;
+            const doctor = document.getElementById("editDoctor").value;
+    
+            // ส่งข้อมูลที่แก้ไขไปยัง Google Apps Script
+            try {
+                const response = await fetch('https://script.google.com/macros/s/your_script_id/exec', {
+                    method: 'POST',
+                    body: JSON.stringify({ username, degree, master, doctor }),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const result = await response.json();
+                alert(result.message); // แสดงข้อความจาก Google Script
+            } catch (error) {
+                console.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล:", error);
             }
         }
+    
+        function showError(message) {
+            let errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = message;
+            errorMessage.style.display = "block";
+        }
     </script>
+
+    
     
 </body>
 </html>
