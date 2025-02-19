@@ -60,23 +60,32 @@
         </div>
     </div>
     <script>
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
+        document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
-
+    
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
-
-            // ตัวอย่าง: สมมติว่ารหัสนักเรียนถูกต้องคือ 12345 และวันเกิดคือ 01072550
-            var correctUsername = "12345";  // เปลี่ยนเป็นข้อมูลจริง
-            var correctPassword = "01072550"; // เปลี่ยนเป็นข้อมูลจริง
-
-            if (username === correctUsername && password === correctPassword) {
-                document.getElementById("loginBox").style.display = "none";  // ซ่อนฟอร์มล็อกอิน
-                document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
-            } else {
-                document.getElementById("errorMessage").style.display = "block"; // แสดงข้อความผิดพลาด
+    
+            try {
+                // ดึงข้อมูลจาก login.json
+                let response = await fetch("/DATA/login.json");
+                let users = await response.json();
+    
+                // ตรวจสอบว่ามีผู้ใช้ที่ตรงกับข้อมูลที่กรอกหรือไม่
+                let isValidUser = users.some(user => user.username === username && user.password === password);
+    
+                if (isValidUser) {
+                    document.getElementById("loginBox").style.display = "none";  // ซ่อนฟอร์มล็อกอิน
+                    document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
+                } else {
+                    document.getElementById("errorMessage").style.display = "block"; // แสดงข้อความผิดพลาด
+                }
+            } catch (error) {
+                console.error("เกิดข้อผิดพลาดในการโหลดข้อมูล:", error);
+                alert("ไม่สามารถโหลดข้อมูลเข้าสู่ระบบได้!");
             }
         });
     </script>
+
 </body>
 </html>
