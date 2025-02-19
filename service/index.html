@@ -112,37 +112,38 @@
                 <p style=" margin: 5px 0; ">ปริญญาเอก: ${userInfo["ปริญญาเอก"]}</p>
                 <p style=" margin: 5px 0; ">สถานะ: ${userInfo["สถานะ"]}</p>
                 <h5>แก้ไขข้อมูล</h5>
-                <label>ปริญญาตรี:</label>
-                <input type="text" id="editDegree" placeholder="ปริญญาตรี" value="${userInfo["ปริญญาตรี"]}">
-                <label>ปริญญาโท:</label>
-                <input type="text" id="editMaster" placeholder="ปริญญาโท" value="${userInfo["ปริญญาโท"]}">
-                <label>ปริญญาเอก:</label>
-                <input type="text" id="editDoctor" placeholder="ปริญญาเอก" value="${userInfo["ปริญญาเอก"]}">
-                <label>สถานะ:</label>
-                <input type="text" id="editStatus" placeholder="สถานะ" value="${userInfo["สถานะ"]}">
-                <button onclick="saveChanges('${userInfo.username}')">บันทึกการเปลี่ยนแปลง</button>
+                <form method="post" autocomplete="off" name="hello-sheet">
+                    <label>คำนำหน้า:</label>
+                    <input type="text" name="Prefix" placeholder="คำนำหน้า" value="${userInfo.prefix}">
+                    <label>ชื่อ:</label>
+                    <input type="text" name="Fname" placeholder="ชื่อ" value="${userInfo.fname}">
+                    <label>นามสกุล:</label>
+                    <input type="text" name="Lname" placeholder="นามสกุล" value="${userInfo.lname}">
+                    <label>ปริญญาตรี:</label>
+                    <input type="text" name="Degree" placeholder="ปริญญาตรี" value="${userInfo["ปริญญาตรี"]}">
+                    <label>ปริญญาโท:</label>
+                    <input type="text" name="Master" placeholder="ปริญญาโท" value="${userInfo["ปริญญาโท"]}">
+                    <label>ปริญญาเอก:</label>
+                    <input type="text" name="Doctor" placeholder="ปริญญาเอก" value="${userInfo["ปริญญาเอก"]}">
+                    <label>สถานะ:</label>
+                    <input type="text" name="Status" placeholder="สถานะ" value="${userInfo["สถานะ"]}">
+                    <button type="submit" name="submit" value="Send message">บันทึกการเปลี่ยนแปลง</button>
+                </form>
             `;
         }
     
-        async function saveChanges(username) {
-            const degree = document.getElementById("editDegree").value;
-            const master = document.getElementById("editMaster").value;
-            const doctor = document.getElementById("editDoctor").value;
-            const status = document.getElementById("editStatus").value;
-    
-            // ส่งข้อมูลที่แก้ไขไปยัง Google Apps Script
-            try {
-                const response = await fetch('https://script.google.com/macros/s/AKfycbw1VHdnVtsKEZ2lCT7XDIqgzizTxFHdLx-BhFTxY053ON0figtwkZ3KNE1BkdXX2Yccvw/exec', {
-                    method: 'POST',
-                    body: JSON.stringify({ username, degree, master, doctor, status }), // เพิ่มสถานะ
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                const result = await response.json();
-                alert(result.message); // แสดงข้อความจาก Google Script
-            } catch (error) {
-                console.error("เกิดข้อผิดพลาดในการบันทึกข้อมูล:", error);
-            }
-        }
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwVAlw1rez8mLtkCRk0ljxsHzX1zb9oYqpuyf-PkOwI_T65m9DSo2wEeCXqDXPA0t7D/exec'
+        const form = document.forms['hello-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                alert("บันทึกข้อมูลเรียบร้อยแล้ว..");
+                window.location.href = "https://gearx2.pages.dev/"; // Redirect to page
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
     
         function showError(message) {
             let errorMessage = document.getElementById("errorMessage");
