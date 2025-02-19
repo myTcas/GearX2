@@ -66,6 +66,12 @@
             var username = document.getElementById("username").value.trim();
             var password = document.getElementById("password").value.trim();
     
+            // ตรวจสอบบัญชีที่ถูกระงับก่อนโหลดข้อมูล
+            if (username === "45405") {
+                showError("⛔ บัญชีนี้ถูกระงับการใช้งาน หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
+                return;
+            }
+    
             try {
                 // ดึงข้อมูลจาก login.json
                 let response = await fetch("/DATA/login.json");
@@ -102,7 +108,5 @@
             errorMessage.style.display = "block";
         }
     </script>
-
-
 </body>
 </html>
