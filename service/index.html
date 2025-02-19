@@ -52,53 +52,47 @@
                     </form>
                 </div>
                 
-                <div class="content" id="mainContent">
-                    <h3>ยินดีต้อนรับ</h3>
-                    <p>ขณะนี้คุณเข้าสู่ระบบแล้ว</p>
+                <div id="mainContent">
+                    <h4>เนื้อหาหลักสำหรับสมาชิก</h4>
+                    <button onclick="logout()">ออกจากระบบ</button>
+                    <div id="welcomeMessage"></div>
                 </div>
             </main>
         </div>
     </div>
 
     <script>
-        // ตรวจสอบทันทีเมื่อพิมพ์ในช่อง username
-        document.getElementById("username").addEventListener("input", function() {
-            var username = this.value.trim();
-            if (username === "45405") {
-                showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
-            } else {
-                // ถ้าไม่ใช่ 45405 ให้ซ่อนข้อความผิดพลาด
-                document.getElementById("errorMessage").style.display = "none";
-            }
-        });
-    
         document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
-    
+
             var username = document.getElementById("username").value.trim();
             var password = document.getElementById("password").value.trim();
-    
+
             try {
                 // ดึงข้อมูลจาก login.json
                 let response = await fetch("/DATA/login.json");
                 let users = await response.json();
-    
+
                 // ค้นหาข้อมูลในไฟล์ JSON
                 let user = users.find(user => user.username === username);
-    
+
                 if (!user) {
                     showError("❌ ไม่พบรหัสนักเรียนนี้");
                     return;
                 }
-    
+
                 if (user.password === "Banned") {
                     showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
                     return;
                 }
-    
+
                 if (user.password === password) {
+                    // บันทึกข้อมูลผู้เข้าสู่ระบบใน Local Storage
+                    localStorage.setItem("loggedInUser", username);
+
                     document.getElementById("loginBox").style.display = "none";  // ซ่อนฟอร์มล็อกอิน
                     document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
+                    document.getElementById("welcomeMessage").innerText = `ยินดีต้อนรับ, ${username}`;
                 } else {
                     showError("❌ รหัสผ่านไม่ถูกต้อง");
                 }
@@ -107,11 +101,28 @@
                 alert("ไม่สามารถโหลดข้อมูลเข้าสู่ระบบได้!");
             }
         });
-    
+
         function showError(message) {
             let errorMessage = document.getElementById("errorMessage");
             errorMessage.innerHTML = message; // ใช้ innerHTML แทน textContent เพื่อให้ <br> ทำงานได้
             errorMessage.style.display = "block";
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            document.getElementById("mainContent").style.display = "none"; // ซ่อนเนื้อหาหลัก
+            document.getElementById("loginBox").style.display = "block"; // แสดงฟอร์มล็อกอิน
+            document.getElementById("errorMessage").style.display = "none"; // ซ่อนข้อความผิดพลาด
+        }
+
+        // ตรวจสอบผู้ใช้เมื่อโหลดหน้าเว็บ
+        window.onload = function() {
+            var loggedInUser = localStorage.getItem("loggedInUser");
+            if (loggedInUser) {
+                document.getElementById("loginBox").style.display = "none"; // ซ่อนฟอร์มล็อกอิน
+                document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
+                document.getElementById("welcomeMessage").innerText = `ยินดีต้อนรับ, ${loggedInUser}`;
+            }
         }
     </script>
     
