@@ -1,0 +1,135 @@
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Anuphan', sans-serif;
+        }
+
+        /* เมนูด้านข้าง */
+        .side-menu {
+            float: left;
+            height: 100vh;
+            width: 250px;
+            background-color: #800;
+            color: white;
+            padding: 20px;
+        }
+
+        .side-menu img {
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .side-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .side-menu li {
+            margin: 10px 0;
+        }
+
+        /* ส่วนเนื้อหาหลัก */
+        .main{
+            margin-left: 250px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        main {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .save-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .cancel-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+        .mt-10{margin-top: 3em;}
+        
+        li li {
+            padding-left: 5px;
+            cursor: pointer;
+        }
+
+        li li a {
+            font-weight: 300;
+        }
+        
+        li li a:hover {
+            font-weight: 500;
+        }
+        
+        li li::before {
+            content: '▶';
+            padding: 0 5px;
+        }
+        h3{
+            color: #800;
+            font-weight: bold;
+            font-size: 32px;
+        }
+        h4{
+            color: #3f3f42;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .gap{
+            height: 15px;
+        }
