@@ -61,112 +61,106 @@
         </div>
     </div>
     <script>
-    document.getElementById("loginForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
-        var username = document.getElementById("username").value.trim();
-        var password = document.getElementById("password").value.trim();
+        document.getElementById("loginForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            var username = document.getElementById("username").value.trim();
+            var password = document.getElementById("password").value.trim();
 
-        try {
-            // ดึงข้อมูลจาก login.json
-            let response = await fetch("/DATA/login.json");
-            let users = await response.json();
-            let user = users.find(user => user.username === username);
+            try {
+                let response = await fetch("/DATA/login.json");
+                let users = await response.json();
+                let user = users.find(user => user.username === username);
 
-            if (!user) {
-                showError("❌ ไม่พบรหัสนักเรียนนี้");
-                return;
-            }
-
-            if (user.password === "Banned") {
-                showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
-                return;
-            }
-
-            if (user.password === password) {
-                // ดึงข้อมูลจาก m-information.json
-                let infoResponse = await fetch("/DATA/m-information.json");
-                let infoUsers = await infoResponse.json();
-                let userInfo = infoUsers.find(info => info.username === username);
-
-                if (userInfo) {
-                    // บันทึกข้อมูลลง localStorage
-                    localStorage.setItem("userInfo", JSON.stringify(userInfo));
-                    displayUserInfo(userInfo); // แสดงข้อมูลของผู้ใช้
-                } else {
-                    showError("❌ ไม่พบข้อมูลในระบบ");
+                if (!user) {
+                    showError("❌ ไม่พบรหัสนักเรียนนี้");
+                    return;
                 }
-            } else {
-                showError("❌ รหัสผ่านไม่ถูกต้อง");
+
+                if (user.password === "Banned") {
+                    showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
+                    return;
+                }
+
+                if (user.password === password) {
+                    let infoResponse = await fetch("/DATA/m-information.json");
+                    let infoUsers = await infoResponse.json();
+                    let userInfo = infoUsers.find(info => info.username === username);
+
+                    if (userInfo) {
+                        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+                        displayUserInfo(userInfo);
+                    } else {
+                        showError("❌ ไม่พบข้อมูลในระบบ");
+                    }
+                } else {
+                    showError("❌ รหัสผ่านไม่ถูกต้อง");
+                }
+            } catch (error) {
+                console.error("เกิดข้อผิดพลาด:", error);
+                alert("ไม่สามารถโหลดข้อมูลเข้าสู่ระบบได้!");
             }
-        } catch (error) {
-            console.error("เกิดข้อผิดพลาด:", error);
-            alert("ไม่สามารถโหลดข้อมูลเข้าสู่ระบบได้!");
-        }
-    });
+        });
 
-    function displayUserInfo(userInfo) {
-        document.getElementById("loginBox").style.display = "none"; // ซ่อนฟอร์มล็อกอิน
-        document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
-        
-        // แสดงข้อมูลของผู้ใช้
-        const userDetailContainer = document.getElementById("userDetail");
-        userDetailContainer.innerHTML = `
-            <h4 style="margin: 5px 0;">ข้อมูลสมาชิก</h4>
-            <p style="margin: 5px 0;">${userInfo.prefix} ${userInfo.fname} ${userInfo.lname}</p>
-            <h5 style="color: #800;">แก้ไขข้อมูล</h5>
-            <form id="editForm">
-                <label>คำนำหน้า:</label>
-                <input type="text" name="Prefix" placeholder="คำนำหน้า" value="${userInfo.prefix}">
-                <label>ชื่อ:</label>
-                <input type="text" name="Fname" placeholder="ชื่อ" value="${userInfo.fname}">
-                <label>นามสกุล:</label>
-                <input type="text" name="Lname" placeholder="นามสกุล" value="${userInfo.lname}">
-                <label>ปริญญาตรี:</label>
-                <input type="text" name="Degree" placeholder="ปริญญาตรี" value="${userInfo['ปริญญาตรี']}">
-                <label>ปริญญาโท:</label>
-                <input type="text" name="Master" placeholder="ปริญญาโท" value="${userInfo['ปริญญาโท']}">
-                <label>ปริญญาเอก:</label>
-                <input type="text" name="Doctor" placeholder="ปริญญาเอก" value="${userInfo['ปริญญาเอก']}">
-                <label>สถานะ:</label>
-                <input type="text" name="Status" placeholder="สถานะ" value="${userInfo['สถานะ']}">
-                <button type="submit">บันทึกการเปลี่ยนแปลง</button>
-            </form>
-        `;
+        function displayUserInfo(userInfo) {
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
 
-        // เพิ่ม event listener สำหรับบันทึกข้อมูล
-        document.getElementById("editForm").addEventListener("submit", saveChanges);
-    }
+            const userDetailContainer = document.getElementById("userDetail");
+            userDetailContainer.innerHTML = `
+                <h4>ข้อมูลสมาชิก</h4>
+                <p>${userInfo.prefix} ${userInfo.fname} ${userInfo.lname}</p>
+                <h5 style="color: #800;">แก้ไขข้อมูล</h5>
+                <form id="editForm">
+                    <label>คำนำหน้า:</label>
+                    <input type="text" name="Prefix" value="${userInfo.prefix}">
+                    <label>ชื่อ:</label>
+                    <input type="text" name="Fname" value="${userInfo.fname}">
+                    <label>นามสกุล:</label>
+                    <input type="text" name="Lname" value="${userInfo.lname}">
+                    <label>ปริญญาตรี:</label>
+                    <input type="text" name="Degree" value="${userInfo['ปริญญาตรี']}">
+                    <label>ปริญญาโท:</label>
+                    <input type="text" name="Master" value="${userInfo['ปริญญาโท']}">
+                    <label>ปริญญาเอก:</label>
+                    <input type="text" name="Doctor" value="${userInfo['ปริญญาเอก']}">
+                    <label>สถานะ:</label>
+                    <input type="text" name="Status" value="${userInfo['สถานะ']}">
+                    <button type="submit">บันทึกการเปลี่ยนแปลง</button>
+                </form>
+            `;
 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwVAlw1rez8mLtkCRk0ljxsHzX1zb9oYqpuyf-PkOwI_T65m9DSo2wEeCXqDXPA0t7D/exec';
-
-    function saveChanges(event) {
-        event.preventDefault();
-        const form = event.target;
-        const formData = new FormData(form);
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
-        if (!userInfo) {
-            alert("❌ ข้อมูลไม่ถูกต้อง กรุณาเข้าสู่ระบบใหม่");
-            return;
+            document.getElementById("editForm").addEventListener("submit", saveChanges);
         }
 
-        // เพิ่ม username ลงใน FormData
-        formData.append("username", userInfo.username);
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwVAlw1rez8mLtkCRk0ljxsHzX1zb9oYqpuyf-PkOwI_T65m9DSo2wEeCXqDXPA0t7D/exec';
 
-        fetch(scriptURL, { method: 'POST', body: formData })
-            .then(response => {
-                alert("บันทึกข้อมูลเรียบร้อยแล้ว..");
-                window.location.href = "https://gearx2.pages.dev/"; // Redirect
-            })
-            .catch(error => console.error('Error!', error.message));
-    }
+        function saveChanges(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-    function showError(message) {
-        let errorMessage = document.getElementById("errorMessage");
-        errorMessage.innerHTML = message;
-        errorMessage.style.display = "block";
-    }
-</script>
+            if (!userInfo) {
+                alert("❌ ข้อมูลไม่ถูกต้อง กรุณาเข้าสู่ระบบใหม่");
+                return;
+            }
+
+            formData.append("username", userInfo.username);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    alert("บันทึกข้อมูลเรียบร้อยแล้ว..");
+                    window.location.href = "https://gearx2.pages.dev/";
+                })
+                .catch(error => console.error('Error!', error.message));
+        }
+
+        function showError(message) {
+            let errorMessage = document.getElementById("errorMessage");
+            errorMessage.innerHTML = message;
+            errorMessage.style.display = "block";
+        }
+    </script>
 
 
     
