@@ -89,7 +89,7 @@
         </div>
         <div class="mt-4">
             <h3>รายชื่อผู้บริหาร</h3>
-            <ul id="executive-list" class="list-group"></ul>
+            <div id="executive-list" class="row"></div>
         </div>
     </main>
   
@@ -125,10 +125,10 @@
                 .then(data => {
                     const list = document.getElementById("executive-list");
                     data.forEach(executive => {
-                        let listItem = document.createElement("li");
-                        listItem.className = "list-group-item";
-                        listItem.textContent = `${executive.name} - ${executive.position}`;
-                        list.appendChild(listItem);
+                        let card = document.createElement("div");
+                        card.className = "col-md-4 executive-card bg-light";
+                        card.innerHTML = `<h5>${executive.name}</h5><p>${executive.position}</p>`;
+                        list.appendChild(card);
                     });
                 })
                 .catch(error => console.error("Error loading executive data:", error));
