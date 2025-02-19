@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กลุ่ม GearX2 - กลุ่มนักเรียนเตรียมวิศวกรรมรุ่นที่ 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .member-list {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="
+    background-color: #800000 !important;">
+        <div class="container">
+            <a class="navbar-brand" href="#">กลุ่มนักเรียนเตรียมวิศวกรรมรุ่นที่ 2</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="index">หน้าหลัก</a>
+                    </li>
+                    <!-- บริการ -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown">
+                            บริการ
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">เปลี่ยนแปลงข้อมูลสมาชิก</a></li>
+                            <li><a class="dropdown-item" href="#">ลงทะเบียนรับบัตรสมาชิก</a></li>
+                            <li><a class="dropdown-item" href="#">สอบถามเตรียมวิศวะ รุ่นที่ 2</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- ข่าวสาร -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="newsDropdown" role="button" data-bs-toggle="dropdown">
+                            ข่าวสาร
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">ความสำเร็จรุ่น 2</a></li>
+                            <li><a class="dropdown-item" href="#">ข่าวสภา GearX2</a></li>
+                            <li><a class="dropdown-item" href="#">กิจกรรม</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- เกี่ยวกับองค์กร -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown">
+                            เกี่ยวกับองค์กร
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="history">ประวัติองค์กร</a></li>
+                            <li><a class="dropdown-item" href="goal">เป้าหมาย</a></li>
+                            <li><a class="dropdown-item" href="#">สมาชิก</a></li>
+                            <li><a class="dropdown-item" href="executive">ผู้บริหาร</a></li>
+                            <li><a class="dropdown-item" href="org-struc">โครงสร้างองค์กร</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- สำนักงานใหญ่ -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://dara-esc.pages.dev/">สำนักงานใหญ่</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+        
+    <main class="container">
+        <div class="text">
+            <h1>กลุ่มนักเรียนเตรียมวิศวกรรมรุ่นที่ 2</h1>
+            <p>หวังเห็นทุกคนมีอนาคตที่ก้าวหน้า</p>
+        </div>
+    </main>
+  
+    <footer>
+        <p><center>&copy; 2025 GearX2. All Rights Reserved.</center></p>
+    </footer>
+    <script src="script.js"></script>
+    <!-- JavaScript รองรับ Drag & Swipe -->
+    <script>
+        $(document).ready(function() {
+            var carousel = $("#mainSlider");
+
+            // รองรับการลาก (Mouse Drag)
+            var startX, endX;
+            carousel.on("mousedown touchstart", function(e) {
+                startX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+            });
+
+            carousel.on("mouseup touchend", function(e) {
+                endX = e.type === "touchend" ? e.changedTouches[0].clientX : e.clientX;
+                if (startX - endX > 50) {
+                    carousel.carousel("next");
+                } else if (endX - startX > 50) {
+                    carousel.carousel("prev");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
