@@ -121,3 +121,15 @@ nav{background-color: #800000 !important;}
 .navbar-toggler:focus {
         box-shadow: unset !important;
     }
+@media (max-width: 330px) {
+    a.navbar-brand {
+        display: none;
+    }
+    img.logo{
+        display: block;
+    }
+}
+
+img.logo{
+    display: none;
+}
