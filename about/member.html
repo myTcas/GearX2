@@ -67,7 +67,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="history">ประวัติองค์กร</a></li>
                             <li><a class="dropdown-item" href="goal">เป้าหมาย</a></li>
-                            <li><a class="dropdown-item" href="#">สมาชิก</a></li>
+                            <li><a class="dropdown-item" href="">สมาชิก</a></li>
                             <li><a class="dropdown-item" href="executive">ผู้บริหาร</a></li>
                             <li><a class="dropdown-item" href="org-struc">โครงสร้างองค์กร</a></li>
                         </ul>
@@ -137,7 +137,7 @@
     </script>
     <script>
         // ดึงข้อมูลจาก members.json
-        fetch('members.json')
+        fetch('/DATA/members.json')
             .then(response => response.json())
             .then(data => {
                 let tableBody = document.getElementById('memberTable');
