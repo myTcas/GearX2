@@ -134,6 +134,27 @@
                 .catch(error => console.error("Error loading executive data:", error));
         });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("/DATA/executive.json")
+                .then(response => response.json())
+                .then(data => {
+                    const list = document.getElementById("executive-list");
+                    data.forEach(executive => {
+                        let card = document.createElement("div");
+                        card.className = "col-md-4 d-flex justify-content-center";
+                        card.innerHTML = `
+                            <div class="executive-card">
+                                <h5>${executive.name}</h5>
+                                <p>${executive.position}</p>
+                            </div>
+                        `;
+                        list.appendChild(card);
+                    });
+                })
+                .catch(error => console.error("Error loading executive data:", error));
+        });
+    </script>
 
 </body>
 </html>
