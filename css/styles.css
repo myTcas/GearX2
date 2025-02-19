@@ -118,3 +118,6 @@ nav{background-color: #800000 !important;}
         box-shadow: unset !important;
     }
 }
+.navbar-toggler:focus {
+        box-shadow: unset !important;
+    }
