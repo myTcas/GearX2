@@ -30,7 +30,7 @@
     </div>
 
     <div class="main">
-        <div class="content">
+        <div class="content-a">
             <h3>ยินดีต้อนรับ</h3>
             <div class="gap"></div>
             <h4>เข้าสู่ระบบบริการสำหรับสมาชิก</h4>
@@ -38,11 +38,46 @@
             <div class="gap"></div>
             <main>
                 <h2>เข้าสู่ระบบสมาชิก</h2>
-                <form>
-                </form>
+                <div class="login-container" id="loginBox">
+                    <h2>เข้าสู่ระบบสมาชิก</h2>
+                    <form id="loginForm">
+                        <label for="username">รหัสนักเรียน:</label>
+                        <input type="text" id="username" name="username" required placeholder="กรอกรหัสนักเรียน">
+        
+                        <label for="password">รหัสผ่าน:</label>
+                        <input type="password" id="password" name="password" required placeholder="วันเดือนปีเกิด (ddmmyyyy)">
+                        <small>(วันเดือนปีเกิด ให้กรอกติดกัน เช่น **01072550** สำหรับ 1 ก.ค. 2550)</small>
+        
+                        <button type="submit">เข้าสู่ระบบ</button>
+                        <p class="error-message" id="errorMessage">❌ รหัสผิดพลาด กรุณาลองใหม่!</p>
+                    </form>
+                </div>
+                
+                <div class="content" id="mainContent">
+                    <h3>ยินดีต้อนรับ</h3>
+                    <p>ขณะนี้คุณเข้าสู่ระบบแล้ว</p>
+                </div>
             </main>
         </div>
     </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
 
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // ตัวอย่าง: สมมติว่ารหัสนักเรียนถูกต้องคือ 12345 และวันเกิดคือ 01072550
+            var correctUsername = "12345";  // เปลี่ยนเป็นข้อมูลจริง
+            var correctPassword = "01072550"; // เปลี่ยนเป็นข้อมูลจริง
+
+            if (username === correctUsername && password === correctPassword) {
+                document.getElementById("loginBox").style.display = "none";  // ซ่อนฟอร์มล็อกอิน
+                document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
+            } else {
+                document.getElementById("errorMessage").style.display = "block"; // แสดงข้อความผิดพลาด
+            }
+        });
+    </script>
 </body>
 </html>
