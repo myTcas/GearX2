@@ -37,6 +37,10 @@
         }
 
         .content {
+            display: none; /* ซ่อนเนื้อหาหลัก จนกว่าจะล็อกอิน */
+        }
+
+        .conten-a {
             padding: 20px;
         }
 
@@ -75,13 +79,24 @@
         }
 
         button {
-            flex: 1;
+            width: 100%;
             padding: 10px;
-            margin: 5px;
+            background-color: #28a745;
+            color: white;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
             font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
         }
 
         .save-btn {
