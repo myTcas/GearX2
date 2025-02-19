@@ -106,12 +106,8 @@
             const userDetailContainer = document.getElementById("userDetail");
             userDetailContainer.innerHTML = `
                 <h4 style=" margin: 5px 0; ">ข้อมูลสมาชิก</h4>
-                <p style=" margin: 5px 0; ">ชื่อ: ${userInfo.prefix} ${userInfo.fname} ${userInfo.lname}</p>
-                <p style=" margin: 5px 0; ">ปริญญาตรี: ${userInfo["ปริญญาตรี"]}</p>
-                <p style=" margin: 5px 0; ">ปริญญาโท: ${userInfo["ปริญญาโท"]}</p>
-                <p style=" margin: 5px 0; ">ปริญญาเอก: ${userInfo["ปริญญาเอก"]}</p>
-                <p style=" margin: 5px 0; ">สถานะ: ${userInfo["สถานะ"]}</p>
-                <h5>แก้ไขข้อมูล</h5>
+                <p style=" margin: 5px 0; ">${userInfo.prefix} ${userInfo.fname} ${userInfo.lname}</p
+                <h5 style="color: #800;">แก้ไขข้อมูล</h5>
                 <form method="post" autocomplete="off" name="hello-sheet">
                     <label>คำนำหน้า:</label>
                     <input type="text" name="Prefix" placeholder="คำนำหน้า" value="${userInfo.prefix}">
