@@ -125,8 +125,9 @@
 
         li li a {
             font-weight: 300;
-           color: #fff;
-           text-decoration: none;
+            color: #fff;
+            text-decoration: none;
+            transition: .2s;
         }
         
         li li a:hover {
