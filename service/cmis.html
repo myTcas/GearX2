@@ -116,20 +116,40 @@
                 <h5>แก้ไขข้อมูล</h5>
                 <form method="post" autocomplete="off" name="hello-sheet">
                     <input type="hidden" name="username" value="${userInfo.username}">
-                    <label>คำนำหน้า:</label>
-                    <input type="text" name="prefix" value="${userInfo.prefix}">
-                    <label>ชื่อ:</label>
-                    <input type="text" name="fname" value="${userInfo.fname}">
-                    <label>นามสกุล:</label>
-                    <input type="text" name="lname" value="${userInfo.lname}">
-                    <label>ปริญญาตรี:</label>
-                    <input type="text" name="degree" value="${userInfo["ปริญญาตรี"]}">
-                    <label>ปริญญาโท:</label>
-                    <input type="text" name="master" value="${userInfo["ปริญญาโท"]}">
-                    <label>ปริญญาเอก:</label>
-                    <input type="text" name="doctor" value="${userInfo["ปริญญาเอก"]}">
-                    <label>สถานะ:</label>
-                    <input type="text" name="status" value="${userInfo["สถานะ"]}">
+                    <div style="display: flex;gap: 10px;">
+                        <div style=" display: grid; text-align: left; ">
+                            <label>คำนำหน้า:</label>
+                            <input type="text" name="prefix" value="${userInfo.prefix}">
+                        </div>
+                        <div style=" display: grid; text-align: left; ">
+                            <label>ชื่อ:</label>
+                            <input type="text" name="fname" value="${userInfo.fname}">
+                        </div>
+                    </div>
+                    <div style="display: flex;gap: 10px;">
+                        <div style=" display: grid; text-align: left; ">
+                            <label>นามสกุล:</label>
+                            <input type="text" name="lname" value="${userInfo.lname}">
+                        </div>
+                        <div style=" display: grid; text-align: left; ">
+                            <label>ปริญญาตรี:</label>
+                            <input type="text" name="degree" value="${userInfo["ปริญญาตรี"]}">
+                        </div>
+                    </div>
+                    <div style="display: flex;gap: 10px;">
+                        <div style=" display: grid; text-align: left; ">
+                            <label>ปริญญาโท:</label>
+                            <input type="text" name="master" value="${userInfo["ปริญญาโท"]}">
+                        </div>
+                        <div style=" display: grid; text-align: left; ">
+                            <label>ปริญญาเอก:</label>
+                            <input type="text" name="doctor" value="${userInfo["ปริญญาเอก"]}">
+                        </div>
+                    </div>
+                    <div style=" display: grid; text-align: left; ">
+                        <label>สถานะ:</label>
+                        <input type="text" name="status" value="${userInfo["สถานะ"]}">
+                    </div>
                     <button type="submit">บันทึกการเปลี่ยนแปลง</button>
                 </form>
             `;
