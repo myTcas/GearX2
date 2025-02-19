@@ -126,7 +126,7 @@ nav{background-color: #800000 !important;}
         display: none;
     }
     img.logo{
-        display: block;
+        display: block !important;
         width: 50px;
         border-radius: 10px;
     }
