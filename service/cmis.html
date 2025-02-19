@@ -64,13 +64,6 @@
         document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             
-            function checkUsername(username) {
-                if (username === "45405") {
-                    showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
-                    return;
-                }
-            }
-            
             let username = document.getElementById("username").value.trim();
             let password = document.getElementById("password").value.trim();
             
@@ -181,6 +174,31 @@
             localStorage.removeItem("loggedInUser");
             window.location.reload();
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const usernameInput = document.getElementById("username");
+        
+            usernameInput.addEventListener("input", function () {
+                if (usernameInput.value === "45405") {
+                    showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
+                    return;
+                }
+            });
+        
+            function showError(message) {
+                const errorContainer = document.getElementById("error-message");
+                if (!errorContainer) {
+                    const newErrorContainer = document.createElement("div");
+                    newErrorContainer.id = "error-message";
+                    newErrorContainer.innerHTML = message;
+                    newErrorContainer.style.color = "red";
+                    newErrorContainer.style.marginTop = "10px";
+                    usernameInput.parentNode.appendChild(newErrorContainer);
+                } else {
+                    errorContainer.innerHTML = message;
+                }
+            }
+        });
 
     </script>
 
