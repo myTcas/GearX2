@@ -148,3 +148,5 @@
         .gap{
             height: 15px;
         }
+
+        #mainContent { display: none; }
