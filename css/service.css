@@ -161,4 +161,5 @@ li b a {
     color: #fff;
     text-decoration: none;
     font-weight: 300;
+    transition: .2s;
 }
