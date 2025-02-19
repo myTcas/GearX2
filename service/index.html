@@ -53,8 +53,7 @@
                 </div>
                 
                 <div id="mainContent">
-                    <h4>เนื้อหาหลักสำหรับสมาชิก</h4>
-                    <div id="userDetail"></div>
+                    <div id="userDetail" style=" margin: 5px 0; "></div>
                     <button onclick="logout()">ออกจากระบบ</button>
                     <div id="welcomeMessage"></div>
                 </div>
@@ -106,16 +105,21 @@
             // แสดงข้อมูลของผู้ใช้
             const userDetailContainer = document.getElementById("userDetail");
             userDetailContainer.innerHTML = `
-                <h4>ข้อมูลสมาชิก</h4>
-                <p>ชื่อ: ${userInfo.prefix} ${userInfo.fname} ${userInfo.lname}</p>
-                <p>ปริญญาตรี: ${userInfo["ปริญญาตรี"]}</p>
-                <p>ปริญญาโท: ${userInfo["ปริญญาโท"]}</p>
-                <p>ปริญญาเอก: ${userInfo["ปริญญาเอก"]}</p>
-                <p>สถานะ: ${userInfo["สถานะ"]}</p>
+                <h4 style=" margin: 5px 0; ">ข้อมูลสมาชิก</h4>
+                <p style=" margin: 5px 0; ">ชื่อ: ${userInfo.prefix} ${userInfo.fname} ${userInfo.lname}</p>
+                <p style=" margin: 5px 0; ">ปริญญาตรี: ${userInfo["ปริญญาตรี"]}</p>
+                <p style=" margin: 5px 0; ">ปริญญาโท: ${userInfo["ปริญญาโท"]}</p>
+                <p style=" margin: 5px 0; ">ปริญญาเอก: ${userInfo["ปริญญาเอก"]}</p>
+                <p style=" margin: 5px 0; ">สถานะ: ${userInfo["สถานะ"]}</p>
                 <h5>แก้ไขข้อมูล</h5>
+                <label>ปริญญาตรี:</label>
                 <input type="text" id="editDegree" placeholder="ปริญญาตรี" value="${userInfo["ปริญญาตรี"]}">
+                <label>ปริญญาโท:</label>
                 <input type="text" id="editMaster" placeholder="ปริญญาโท" value="${userInfo["ปริญญาโท"]}">
+                <label>ปริญญาเอก:</label>
                 <input type="text" id="editDoctor" placeholder="ปริญญาเอก" value="${userInfo["ปริญญาเอก"]}">
+                <label>สถานะ:</label>
+                <input type="text" id="editStatus" placeholder="สถานะ" value="${userInfo["สถานะ"]}">
                 <button onclick="saveChanges('${userInfo.username}')">บันทึกการเปลี่ยนแปลง</button>
             `;
         }
@@ -124,12 +128,13 @@
             const degree = document.getElementById("editDegree").value;
             const master = document.getElementById("editMaster").value;
             const doctor = document.getElementById("editDoctor").value;
+            const status = document.getElementById("editStatus").value;
     
             // ส่งข้อมูลที่แก้ไขไปยัง Google Apps Script
             try {
-                const response = await fetch('https://script.google.com/macros/s/your_script_id/exec', {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzWUnRlkyy5YOGVqu0N9v_YjP6uOlc0TJooBGIaMr-zY2qjApV4apkIye7_XInAPtVM/exec', {
                     method: 'POST',
-                    body: JSON.stringify({ username, degree, master, doctor }),
+                    body: JSON.stringify({ username, degree, master, doctor, status }), // เพิ่มสถานะ
                     headers: { 'Content-Type': 'application/json' }
                 });
                 const result = await response.json();
