@@ -63,29 +63,46 @@
         document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
     
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
+            var username = document.getElementById("username").value.trim();
+            var password = document.getElementById("password").value.trim();
     
             try {
                 // ดึงข้อมูลจาก login.json
                 let response = await fetch("/DATA/login.json");
                 let users = await response.json();
     
-                // ตรวจสอบว่ามีผู้ใช้ที่ตรงกับข้อมูลที่กรอกหรือไม่
-                let isValidUser = users.some(user => user.username === username && user.password === password);
+                // ค้นหาข้อมูลในไฟล์ JSON
+                let user = users.find(user => user.username === username);
     
-                if (isValidUser) {
+                if (!user) {
+                    showError("❌ ไม่พบรหัสนักเรียนนี้");
+                    return;
+                }
+    
+                if (user.password === "Banned") {
+                    showError("⛔ บัญชีนี้ถูกระงับการใช้งาน");
+                    return;
+                }
+    
+                if (user.password === password) {
                     document.getElementById("loginBox").style.display = "none";  // ซ่อนฟอร์มล็อกอิน
                     document.getElementById("mainContent").style.display = "block"; // แสดงเนื้อหาหลัก
                 } else {
-                    document.getElementById("errorMessage").style.display = "block"; // แสดงข้อความผิดพลาด
+                    showError("❌ รหัสผ่านไม่ถูกต้อง");
                 }
             } catch (error) {
-                console.error("เกิดข้อผิดพลาดในการโหลดข้อมูล:", error);
+                console.error("เกิดข้อผิดพลาด:", error);
                 alert("ไม่สามารถโหลดข้อมูลเข้าสู่ระบบได้!");
             }
         });
+    
+        function showError(message) {
+            let errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = message;
+            errorMessage.style.display = "block";
+        }
     </script>
+
 
 </body>
 </html>
