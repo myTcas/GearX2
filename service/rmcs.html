@@ -17,9 +17,7 @@
             <div class="mt-10">
                 <ul>
                     <li>
-                        <b>
-                            <a href="/">หน้าหลัก</a>
-                        </b>
+                        <b><a href="/">หน้าหลัก</a></b>
                     </li>
                     <li>
                         <b>บริการสมาชิกบุคคลทั่วไป</b>
@@ -47,94 +45,53 @@
                     <form method="post" autocomplete="off" name="hello-sheet">
                         <label for="username">รหัสนักเรียน:</label>
                         <input type="text" id="username" name="username" required placeholder="กรอกรหัสนักเรียน">
-        
-                        <button type="submit" style=" margin-top: 15px; ">ลงทะเบียนรับบัตรสมาชิก</button>
+                        <button type="submit" style="margin-top: 15px;">ลงทะเบียนรับบัตรสมาชิก</button>
                         <div id="errorMessage" style="display: block;color: red;margin-top: 10px;"></div>
                     </form>
                 </div>
             </main>
         </div>
     </div>
+
     <script>
-        attachFormSubmit();
-        function attachFormSubmit() {
+        document.addEventListener("DOMContentLoaded", function () {
             const scriptURL = 'https://script.google.com/macros/s/AKfycbyq5TX8t1LnmeJ6N4hc8Uqp7bqx80UutGVf9g8guF-LoJgNEmIuolHHfIMfu8HgQpRHaA/exec';
             const form = document.forms['hello-sheet'];
-        
+            const usernameInput = document.getElementById("username");
+            const errorContainer = document.getElementById("errorMessage");
+
+            // ฟังก์ชันแสดงข้อความผิดพลาด
+            function showError(message) {
+                errorContainer.innerHTML = message;
+                errorContainer.style.display = "block";
+            }
+
+            // ตรวจสอบข้อมูลเมื่อมีการกรอก
+            usernameInput.addEventListener("input", function () {
+                if (usernameInput.value === "45405") {
+                    showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
+                    return;
+                } else {
+                    showError(""); // เคลียร์ข้อความผิดพลาด
+                }
+            });
+
+            // ส่งข้อมูลฟอร์ม
             form.addEventListener('submit', e => {
                 e.preventDefault();
-        
-                fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+
+                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
                     .then(response => {
+                        if (!response.ok) throw new Error("เกิดข้อผิดพลาดในการส่งข้อมูล");
                         alert("✅ บันทึกข้อมูลเรียบร้อยแล้ว");
                         window.location.href = ""; // กลับไปหน้าแรก
                     })
-                    .catch(error => console.error('Error!', error.message));
+                    .catch(error => {
+                        showError("❌ ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่อีกครั้ง");
+                        console.error('Error!', error.message);
+                    });
             });
-        }
-        
-        // แสดงข้อความผิดพลาด
-        function showError(message) {
-            let errorMessage = document.getElementById("errorMessage");
-            errorMessage.innerHTML = message;
-            errorMessage.style.display = "block";
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const usernameInput = document.getElementById("username");
-        
-            usernameInput.addEventListener("input", function () {
-                if (usernameInput.value === "45405") {
-                    showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
-                    return;
-                }
-            });
-        
-            function showError(message) {
-                const errorContainer = document.getElementById("error-message");
-                if (!errorContainer) {
-                    const newErrorContainer = document.createElement("div");
-                    newErrorContainer.id = "error-message";
-                    newErrorContainer.innerHTML = message;
-                    newErrorContainer.style.color = "red";
-                    newErrorContainer.style.marginTop = "10px";
-                    usernameInput.parentNode.appendChild(newErrorContainer);
-                } else {
-                    errorContainer.innerHTML = message;
-                }
-            }
         });
-
-    
-        document.addEventListener("DOMContentLoaded", function () {
-            const usernameInput = document.getElementById("username");
-        
-            usernameInput.addEventListener("input", function () {
-                if (usernameInput.value === "45405") {
-                    showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
-                    return;
-                }
-            });
-        
-            function showError(message) {
-                const errorContainer = document.getElementById("error-message");
-                if (!errorContainer) {
-                    const newErrorContainer = document.createElement("div");
-                    newErrorContainer.id = "error-message";
-                    newErrorContainer.innerHTML = message;
-                    newErrorContainer.style.color = "red";
-                    newErrorContainer.style.marginTop = "10px";
-                    usernameInput.parentNode.appendChild(newErrorContainer);
-                } else {
-                    errorContainer.innerHTML = message;
-                }
-            }
-        });
-
     </script>
-
-
-    
-    
 </body>
 </html>
