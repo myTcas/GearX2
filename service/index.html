@@ -63,34 +63,37 @@
     <script>
         document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
-            var username = document.getElementById("username").value.trim();
-            var password = document.getElementById("password").value.trim();
-
+            
+            let username = document.getElementById("username").value.trim();
+            let password = document.getElementById("password").value.trim();
+        
             try {
+                // ดึงข้อมูลจาก login.json
                 let response = await fetch("/DATA/login.json");
                 let users = await response.json();
                 let user = users.find(user => user.username === username);
-
+        
                 if (!user) {
                     showError("❌ ไม่พบรหัสนักเรียนนี้");
                     return;
                 }
-
+        
                 if (user.password === "Banned") {
                     showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
                     return;
                 }
-
+        
                 if (user.password === password) {
+                    // ดึงข้อมูลจาก m-information.json
                     let infoResponse = await fetch("/DATA/m-information.json");
                     let infoUsers = await infoResponse.json();
                     let userInfo = infoUsers.find(info => info.username === username);
-
+        
                     if (userInfo) {
-                        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+                        localStorage.setItem("loggedInUser", JSON.stringify(userInfo)); // บันทึกข้อมูล
                         displayUserInfo(userInfo);
                     } else {
-                        showError("❌ ไม่พบข้อมูลในระบบ");
+                        showError("❌ ไม่พบข้อมูลสมาชิก");
                     }
                 } else {
                     showError("❌ รหัสผ่านไม่ถูกต้อง");
@@ -100,66 +103,78 @@
                 alert("ไม่สามารถโหลดข้อมูลเข้าสู่ระบบได้!");
             }
         });
-
+        
+        // แสดงข้อมูลสมาชิก
         function displayUserInfo(userInfo) {
             document.getElementById("loginBox").style.display = "none";
             document.getElementById("mainContent").style.display = "block";
-
+        
             const userDetailContainer = document.getElementById("userDetail");
             userDetailContainer.innerHTML = `
                 <h4>ข้อมูลสมาชิก</h4>
                 <p>${userInfo.prefix} ${userInfo.fname} ${userInfo.lname}</p>
-                <h5 style="color: #800;">แก้ไขข้อมูล</h5>
-                <form id="editForm">
+                <h5>แก้ไขข้อมูล</h5>
+                <form name="hello-sheet">
+                    <input type="hidden" name="username" value="${userInfo.username}">
                     <label>คำนำหน้า:</label>
-                    <input type="text" name="Prefix" value="${userInfo.prefix}">
+                    <input type="text" name="prefix" value="${userInfo.prefix}">
                     <label>ชื่อ:</label>
-                    <input type="text" name="Fname" value="${userInfo.fname}">
+                    <input type="text" name="fname" value="${userInfo.fname}">
                     <label>นามสกุล:</label>
-                    <input type="text" name="Lname" value="${userInfo.lname}">
+                    <input type="text" name="lname" value="${userInfo.lname}">
                     <label>ปริญญาตรี:</label>
-                    <input type="text" name="Degree" value="${userInfo['ปริญญาตรี']}">
+                    <input type="text" name="degree" value="${userInfo["ปริญญาตรี"]}">
                     <label>ปริญญาโท:</label>
-                    <input type="text" name="Master" value="${userInfo['ปริญญาโท']}">
+                    <input type="text" name="master" value="${userInfo["ปริญญาโท"]}">
                     <label>ปริญญาเอก:</label>
-                    <input type="text" name="Doctor" value="${userInfo['ปริญญาเอก']}">
+                    <input type="text" name="doctor" value="${userInfo["ปริญญาเอก"]}">
                     <label>สถานะ:</label>
-                    <input type="text" name="Status" value="${userInfo['สถานะ']}">
+                    <input type="text" name="status" value="${userInfo["สถานะ"]}">
                     <button type="submit">บันทึกการเปลี่ยนแปลง</button>
                 </form>
             `;
-
-            document.getElementById("editForm").addEventListener("submit", saveChanges);
+        
+            attachFormSubmit(); // ผูกฟังก์ชันส่งฟอร์ม
         }
-
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwVAlw1rez8mLtkCRk0ljxsHzX1zb9oYqpuyf-PkOwI_T65m9DSo2wEeCXqDXPA0t7D/exec';
-
-        function saveChanges(event) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
-            if (!userInfo) {
-                alert("❌ ข้อมูลไม่ถูกต้อง กรุณาเข้าสู่ระบบใหม่");
-                return;
-            }
-
-            formData.append("username", userInfo.username);
-
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => {
-                    alert("บันทึกข้อมูลเรียบร้อยแล้ว..");
-                    window.location.href = "https://gearx2.pages.dev/";
-                })
-                .catch(error => console.error('Error!', error.message));
+        
+        // ฟังก์ชันบันทึกข้อมูลไป Google Sheet
+        function attachFormSubmit() {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwVAlw1rez8mLtkCRk0ljxsHzX1zb9oYqpuyf-PkOwI_T65m9DSo2wEeCXqDXPA0t7D/exec';
+            const form = document.forms['hello-sheet'];
+        
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+        
+                fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                    .then(response => {
+                        alert("✅ บันทึกข้อมูลเรียบร้อยแล้ว");
+                        window.location.href = ""; // กลับไปหน้าแรก
+                    })
+                    .catch(error => console.error('Error!', error.message));
+            });
         }
-
+        
+        // แสดงข้อความผิดพลาด
         function showError(message) {
             let errorMessage = document.getElementById("errorMessage");
             errorMessage.innerHTML = message;
             errorMessage.style.display = "block";
         }
+        
+        // เช็คว่ามีคนล็อกอินอยู่ไหม
+        window.onload = function() {
+            let savedUser = localStorage.getItem("loggedInUser");
+            if (savedUser) {
+                displayUserInfo(JSON.parse(savedUser));
+            }
+        };
+        
+        // ฟังก์ชันออกจากระบบ
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            window.location.reload();
+        }
+
     </script>
 
 
