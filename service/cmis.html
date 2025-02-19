@@ -64,9 +64,16 @@
         document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             
+            function checkUsername(username) {
+                if (username === "45405") {
+                    showError("⛔ บัญชีนี้ถูกระงับการใช้งาน<br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
+                    return;
+                }
+            }
+            
             let username = document.getElementById("username").value.trim();
             let password = document.getElementById("password").value.trim();
-        
+            
             try {
                 // ดึงข้อมูลจาก login.json
                 let response = await fetch("/DATA/login.json");
