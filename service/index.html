@@ -48,7 +48,7 @@
                         <small>(วันเดือนปีเกิด ให้กรอกติดกันเช่น เกิดวันที่ 17/05/2530 ให้กรอกเป็น 17052530)</small>
         
                         <button type="submit">เข้าสู่ระบบ</button>
-                        <div id="errorMessage" style="display:none; color:red;"></div>
+                        <div id="errorMessage" style="display: block;color: red;margin-top: 10px;"></div>
                     </form>
                 </div>
                 
@@ -65,7 +65,7 @@
         document.getElementById("username").addEventListener("input", function() {
             var username = this.value.trim();
             if (username === "45405") {
-                showError("⛔ บัญชีนี้ถูกระงับการใช้งาน หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
+                showError("⛔ บัญชีนี้ถูกระงับการใช้งาน <br>หากมีข้อสงสัยให้สอบถามหัวหน้าสำนักงานสภา");
             } else {
                 // ถ้าไม่ใช่ 45405 ให้ซ่อนข้อความผิดพลาด
                 document.getElementById("errorMessage").style.display = "none";
