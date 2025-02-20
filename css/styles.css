@@ -139,3 +139,7 @@ nav{background-color: #800000 !important;}
 img.logo{
     display: none;
 }
+
+.pointer {
+    cursor: pointer;
+}
