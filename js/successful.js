@@ -10,11 +10,11 @@ window.onload = async () => {
         await fetchSuccessfulData(); // โหลดข้อมูลจาก API
 
         // เริ่มทำให้ Loader จางหาย
-        loader.classList.add("hidden");
+            loader.style.opacity = "0";
 
         // รอให้ effect จางหายเสร็จ (0.5s) แล้วซ่อน
         setTimeout(() => {
-            loader.style.opacity = "0";
+            loader.style.display = "none";
             content.style.display = "block"; // แสดงเนื้อหา
         }, 500);
     } catch (error) {
