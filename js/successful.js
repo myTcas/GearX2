@@ -61,7 +61,7 @@
 
         async function fetchNewsData() {
             try {
-                const response = await fetch("https://script.google.com/macros/s/AKfycbwiqJJPzn9RIH2-1QJChwQdTAcVgns0Vk9O4Kcos3EYmwDoY1p-qCOqqykfeCYb-z8A2Q/exec");
+                const response = await fetch("https://script.google.com/macros/s/AKfycbyhDE4wiHhMaXYlp-JJlvbPpf-zg_Xm8o3vMWWhFUU2YMItgAovm2ou6rEG9Y01WuZU/exec");
                 const data = await response.json();
 
                 console.log("API Response:", data);
@@ -86,7 +86,7 @@
                 const listItem = document.createElement("li");
                 listItem.className = "news-item";
                 listItem.innerHTML = `
-                    <div class="successful-details">
+                    <div class="successful-details" onclick="window.open('${news.link}', '_blank')">
                         <h3 class="successful-title">${news.title}</h3>
                         <p class="successful-date">วันที่ ${news.date}</p>
                     </div>
