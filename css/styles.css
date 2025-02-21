@@ -226,3 +226,15 @@ h3.successful-title {
     transition: opacity 0.75s, visibility 0.75s;
     gap: 10px;
 }
+
+@media (max-width: 1200px) {
+    .successful-item {
+        width: 50% !important;
+    }
+}
+
+@media (max-width: 770px) {
+    .successful-item {
+        width: 100% !important;
+    }
+}
