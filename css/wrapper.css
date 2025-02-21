@@ -40,3 +40,9 @@
   border-radius: 2px;
   overflow: hidden;
 }
+/*  */
+
+
+.successful-image img {
+    width: 150px;
+}
