@@ -225,6 +225,8 @@ h3.successful-title {
     justify-content: center;
     transition: opacity 0.75s, visibility 0.75s;
     gap: 10px;
+    user-select: none;
+
 }
 
 @media (max-width: 1200px) {
