@@ -1,6 +1,6 @@
 async function fetchSuccessfulData() {
     try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbwiqJJPzn9RIH2-1QJChwQdTAcVgns0Vk9O4Kcos3EYmwDoY1p-qCOqqykfeCYb-z8A2Q/exec");
+        const response = await fetch("https://script.google.com/macros/s/AKfycbyHOaFAOeK1Rd2K-ba4FA4xm7ZedGLzLDKa_Xa213fxJS0KbFPC9WOCLO9kPBPyR9L2/exec");
         const data = await response.json();
 
         console.log("API Response:", data); // เช็คข้อมูลที่ API ส่งมา
