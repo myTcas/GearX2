@@ -199,3 +199,10 @@ h3.successful-title {
     justify-content: space-between;
     align-items: center;
 }
+
+.successful a {
+    color: #a91f23;
+    text-decoration: none;
+    font-weight: 200;
+    transition: .3s;
+}
