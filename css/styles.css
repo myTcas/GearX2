@@ -3,6 +3,11 @@
     margin: 0;
 }
 
+::selection {
+    color: #fff;
+    background: #ffc107;
+}
+
 body{
   font-family: "Anuphan", serif !important;
   overflow-x: hidden;
