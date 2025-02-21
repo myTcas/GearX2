@@ -203,6 +203,6 @@ h3.successful-title {
 .successful a {
     color: #a91f23;
     text-decoration: none;
-    font-weight: 200;
+    font-weight: 500;
     transition: .3s;
 }
