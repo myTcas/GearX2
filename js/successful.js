@@ -86,9 +86,9 @@
                 const listItem = document.createElement("li");
                 listItem.className = "news-item";
                 listItem.innerHTML = `
-                    <div class="successful-details" onclick="window.open('${news.link}', '_blank')">
-                        <h3 class="successful-title">${news.title}</h3>
-                        <p class="successful-date">วันที่ ${news.date}</p>
+                    <div class="news-details" onclick="window.open('${news.link}', '_blank')" style=" cursor: pointer; ">
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-date">วันที่ ${news.date}</p>
                     </div>
                 `;
                 newsListElement.appendChild(listItem);
