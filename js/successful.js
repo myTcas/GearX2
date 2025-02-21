@@ -36,6 +36,25 @@ function displaySuccessful(data) {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    fetchSuccessfulData();
-});
+window.onload = () => {
+    // แสดง Loader ตอนแรก
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("re-load").style.display = "none";
+
+    // โหลดข้อมูล
+    fetchSuccessfulData().then(() => {
+        // ซ่อน Loader และแสดงเนื้อหา
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("re-load").style.display = "block";
+    });
+};
+
+// ตัวอย่างฟังก์ชันโหลดข้อมูล (สมมติใช้ fetch API)
+function fetchSuccessfulData() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Data loaded!");
+            resolve();
+        }, 2000); // จำลองโหลดข้อมูล 2 วินาที
+    });
+}
