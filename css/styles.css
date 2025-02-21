@@ -195,7 +195,14 @@ section.hero h2 {
     background: #fff;
     transition: .3s;
     border-radius: 10px;
+}
+
+.successful-details {
     min-height: 220px;
+}
+
+.news-details {
+    min-height: 100px;
 }
 
 h3.successful-title,
