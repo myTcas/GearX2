@@ -211,3 +211,14 @@ h3.successful-title {
     opacity: 0;
     pointer-events: none; /* ป้องกันการคลิกขณะจางหาย */
 }
+
+#loader {
+    text-align: center;
+    padding-top: 30%;
+    height: 100vh;
+    z-index: 999;
+    position: relative;
+    user-select: none;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
