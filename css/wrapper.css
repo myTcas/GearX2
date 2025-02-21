@@ -1,0 +1,42 @@
+.wrapper {
+  width: 90%;
+  max-width: 1500px;
+  margin-inline: auto;
+  position: relative;
+  height: 200px;
+  margin-top: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,0),
+    rgba(0,0,0,1) 20%,
+    rgba(0,0,0,1) 80%,
+    rgba(0,0,0,0)
+  );
+}
+
+.scroller {
+  display: flex;
+  gap: 20px;
+  width: fit-content;
+  animation: scrollLeft 20s linear infinite;
+}
+
+@keyframes scrollLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.item {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  overflow: hidden;
+}
