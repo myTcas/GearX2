@@ -207,3 +207,7 @@ h3.successful-title {
     font-weight: 500;
     transition: .3s;
 }
+.hidden {
+    opacity: 0;
+    pointer-events: none; /* ป้องกันการคลิกขณะจางหาย */
+}
