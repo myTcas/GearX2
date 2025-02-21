@@ -189,6 +189,7 @@ section.hero h2 {
     background: #fff;
     transition: .3s;
     border-radius: 10px;
+    min-height: 220px;
 }
 h3.successful-title {
     font-size: 16px !important;
