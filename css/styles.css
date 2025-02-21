@@ -49,6 +49,7 @@ nav{background-color: #800000 !important;}
 
 #mainSlider img {
     border-radius: 10px;
+    -webkit-user-drag: none;
 }
 
 .text h1 {
