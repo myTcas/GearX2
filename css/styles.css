@@ -213,12 +213,16 @@ h3.successful-title {
 }
 
 #loader {
-    text-align: center;
-    padding-top: 30%;
     height: 100vh;
-    z-index: 999;
-    position: relative;
-    user-select: none;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    position: fixed;
+    inset: 0px;
+    background: rgb(255, 255, 255);
+    z-index: 99999;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    transition: opacity 0.75s, visibility 0.75s;
+    gap: 10px;
 }
