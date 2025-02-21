@@ -163,3 +163,39 @@ section.hero h2 {
         font-size: 16px !important;
     }
 }
+
+.successful-list {
+    display: flex;
+    align-items: flex-start;
+    border-top: 1px solid #a91f23;
+    padding: 10px 0;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.successful-item {
+    width: 33.33333333%;
+}
+
+.successful-details:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.successful-details {
+    margin: 5px;
+    padding: 1.5em;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    transition: .3s;
+    border-radius: 10px;
+}
+h3.successful-title {
+    font-size: 16px !important;
+}
+
+.successful {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
