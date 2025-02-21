@@ -14,7 +14,7 @@ window.onload = async () => {
 
         // รอให้ effect จางหายเสร็จ (0.5s) แล้วซ่อน
         setTimeout(() => {
-            loader.style.display = "none";
+            loader.style.opacity = "0";
             content.style.display = "block"; // แสดงเนื้อหา
         }, 500);
     } catch (error) {
