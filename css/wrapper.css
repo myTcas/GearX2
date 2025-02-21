@@ -1,4 +1,5 @@
 .wrapper {
+    width: 100%;
   max-width: 1500px;
   margin-inline: auto;
   position: relative;
