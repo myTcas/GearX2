@@ -1,16 +1,22 @@
-
-
 window.onload = async () => {
+    const loader = document.getElementById("loader");
+    const content = document.getElementById("re-load");
+
     // แสดง Loader ตอนแรก
-    document.getElementById("loader").style.display = "block";
-    document.getElementById("re-load").style.display = "none";
+    loader.style.opacity = "1";
+    content.style.display = "none";
 
     try {
-        await fetchSuccessfulData(); // รอให้ข้อมูลโหลดเสร็จ
+        await fetchSuccessfulData(); // โหลดข้อมูลจาก API
 
-        // ซ่อน Loader และแสดงเนื้อหา
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("re-load").style.display = "block";
+        // เริ่มทำให้ Loader จางหาย
+        loader.classList.add("hidden");
+
+        // รอให้ effect จางหายเสร็จ (0.5s) แล้วซ่อน
+        setTimeout(() => {
+            loader.style.display = "none";
+            content.style.display = "block"; // แสดงเนื้อหา
+        }, 500);
     } catch (error) {
         console.error("โหลดข้อมูลล้มเหลว:", error);
     }
@@ -30,7 +36,7 @@ async function fetchSuccessfulData() {
         }
     } catch (error) {
         console.error("เกิดข้อผิดพลาดในการดึงข้อมูล:", error);
-        throw error; // แจ้งว่าโหลดข้อมูลไม่สำเร็จ
+        throw error;
     }
 }
 
