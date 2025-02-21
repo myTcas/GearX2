@@ -247,13 +247,13 @@ h3.news-title {
 }
 
 @media (max-width: 1200px) {
-    .successful-item {
+    .successful-item, .news-item {
         width: 50% !important;
     }
 }
 
 @media (max-width: 770px) {
-    .successful-item {
+    .successful-item, .news-item {
         width: 100% !important;
     }
 }
