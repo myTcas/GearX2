@@ -25,13 +25,9 @@ function displaySuccessful(data) {
         listItem.className = "successful-item";
 
         listItem.innerHTML = `
-            <div class="successful-image"  style=" cursor: pointer; " onclick="window.location.href='${successful.link}'">
-                <img src="${successful.image}" alt="${successful.title}">
-            </div>
-            <div class="successful-details"  onclick="window.location.href='${successful.link}'">
+            <div class="successful-details">
                 <h3 class="successful-title"  style=" cursor: pointer; ">${successful.title}</h3>
                 <p class="successful-date" style=" cursor: pointer; ">วันที่ ${successful.date}</p> <!-- ใช้วันที่ตรงๆ -->
-                <p class="successful-content"  style=" cursor: pointer; ">${successful.content} <a href="${successful.link}" class="successful-link">อ่านเพิ่มเติม...</a></p>
             </div>
         `;
 
