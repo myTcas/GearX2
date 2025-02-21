@@ -35,6 +35,7 @@ function displaySuccessful(data) {
     });
 }
 
-window.onload = () => {
+
+document.addEventListener("DOMContentLoaded", () => {
     fetchSuccessfulData();
-};
+});
