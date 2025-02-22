@@ -61,3 +61,9 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     padding-left: 20px;
     border-left: 5px solid #800;
 }
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Anuphan', sans-serif !important;
+}
