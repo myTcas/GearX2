@@ -262,3 +262,9 @@ h3.news-title {
         width: 100% !important;
     }
 }
+
+.news a:hover,
+.successful a:hover {
+    padding-right: 10px;
+    transition: 0.3s;
+}
