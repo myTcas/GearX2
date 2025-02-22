@@ -61,7 +61,7 @@
 
         async function fetchNewsData() {
             try {
-                const response = await fetch("https://script.google.com/macros/s/AKfycbyhDE4wiHhMaXYlp-JJlvbPpf-zg_Xm8o3vMWWhFUU2YMItgAovm2ou6rEG9Y01WuZU/exec");
+                const response = await fetch("https://script.google.com/macros/s/AKfycbwcyXIoRfS7KZATV5LAHZ58lvWrCRfem02k9MjEPyajVsDinHp4ekHqn5l3ZrKi8_0X/exec");
                 const data = await response.json();
 
                 console.log("API Response:", data);
