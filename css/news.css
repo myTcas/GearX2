@@ -67,3 +67,18 @@ h1, h2, h3, h4, h5, h6, p, a, li {
     margin: 0;
     font-family: 'Anuphan', sans-serif !important;
 }
+
+.post-category:hover {
+    text-decoration: underline;
+}
+.post-category {
+    display: flex;
+    font-size: 16px;
+    color: #792024;
+    gap: 10px;
+    align-items: center;
+}
+
+.post-category i {
+    font-size: 20px;
+}
